@@ -1,3 +1,5 @@
+#this is for a random sequence
+#
 import tensorflow as tf
 import numpy as np
 
