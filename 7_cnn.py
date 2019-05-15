@@ -24,7 +24,10 @@ initial_state = multi_lstm.zero_state(batch_size=32, dtype=tf.float32)
 # if time_major = False, input shape=[batch_size, timestep_size, input_size]
 outputs, states = tf.nn.dynamic_rnn(multi_lstm, x_data, initial_state=initial_state, dtype=tf.float32, time_major=False)
 # output shape=[batch_size, timestep_size, hidden_size]
-# state shape=[layer_num, 2, batch_size, hidden_size]
+# state shape is tuple
+# (c:batch_size, hidden_size; --cell state
+#  h:batch_size, hidden_size )--hidden state, same with [:, -1, :] if input without padding
+# else we should use states.h as final stata
 final_state = outputs[:, -1, :]
 
 #DNN
